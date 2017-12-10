@@ -27,7 +27,7 @@ CONF_JAILS = 'jails'
 
 DEFAULT_NAME = 'fail2ban'
 DEFAULT_LOG = '/var/log/fail2ban.log'
-SCAN_INTERVAL = timedelta(seconds=120)
+SCAN_INTERVAL = 60
 
 STATE_CURRENT_BANS = 'current_bans'
 STATE_ALL_BANS = 'total_bans'
@@ -37,6 +37,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
         vol.All(cv.ensure_list, vol.Length(min=1)),
     vol.Optional(CONF_FILE_PATH, default=DEFAULT_LOG): cv.isfile,
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+    vol.Required(CONF_SCAN_INTERVAL): cv.positive_timedelta,
 })
 
 
